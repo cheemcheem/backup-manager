@@ -4,6 +4,11 @@ import os
 import shutil
 from datetime import datetime
 
+# Ensure using Python 3.7 minimum as subprocess.Popen() does not have "text" argument in 3.6 and below.
+# Will fail to run on less than Python 3 since function defs have types, but it is checked for completeness,
+if sys.version_info.major < 3 or (sys.version_info.major == 3 and sys.version_info.minor < 7):
+    raise Exception("Must be using Python 3.7+.")
+
 
 def get_size_kilobytes(directory: str) -> int:
     """ Return total size in KB of the given directory and its subtree.
